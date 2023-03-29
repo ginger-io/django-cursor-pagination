@@ -196,7 +196,7 @@ class CursorPaginator(object):
             parts = order.lstrip('-').split('__')
             attr = instance
             while parts:
-                attr = getattr(attr, parts[0])
+                attr = attr[parts[0]] if isinstance(attr, dict) else getattr(attr, parts[0])
                 parts.pop(0)
             if attr is None:
                 position.append(self.none_string)
